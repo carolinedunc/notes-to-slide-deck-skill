@@ -20,7 +20,7 @@ def add_brand_slide(prs, title_text, slide_num):
       fill.fore_color.rgb = BACKGROUND
       
       #wordmark formatting 
-      wordmark_textbox = slide.shapes.add_textbox(Inches(0.5), Inches(0.3), Inches(3), Inches(0.3))
+      wordmark_textbox = slide.shapes.add_textbox(Inches(1), Inches(0.15), Inches(3), Inches(0.3))
       wordmarkFrame = wordmark_textbox.text_frame
       wordmarkFrame.text = "DUNCAN & CO."
       wordmarkRun = wordmarkFrame.paragraphs[0].runs[0]
@@ -29,7 +29,7 @@ def add_brand_slide(prs, title_text, slide_num):
       wordmarkRun.font.color.rgb = NAVY
 
       #title formatting
-      title_textbox = slide.shapes.add_textbox(Inches(0.5), Inches(0.6), Inches(8.5), Inches(1.0))
+      title_textbox = slide.shapes.add_textbox(Inches(1), Inches(0.4), Inches(8.5), Inches(1.0))
       textframe = title_textbox.text_frame 
       textframe.text = title_text
       run = textframe.paragraphs[0].runs[0]
@@ -38,13 +38,13 @@ def add_brand_slide(prs, title_text, slide_num):
       run.font.color.rgb = NAVY
 
       #orange line after title 
-      line1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(1.05), Inches(8.5), Inches(0.02))
+      line1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(1), Inches(9.5), Inches(0.02))
       line1.fill.solid()
       line1.fill.fore_color.rgb = ORANGE
       line1.line.fill.background()
 
       #footer formatting
-      footer1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(5.3), Inches(8.5), Inches(0.02))
+      footer1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(5.3), Inches(9.5), Inches(0.02))
       footer1.fill.solid()
       footer1.fill.fore_color.rgb = GREY
       footer1.line.fill.background()
@@ -65,6 +65,9 @@ def add_brand_slide(prs, title_text, slide_num):
       numberRun.font.size = Pt(9)
       numberRun.font.color.rgb = GREY
       numberFrame.paragraphs[0].alignment = PP_ALIGN.RIGHT
+
+      #logo placement
+      logo = slide.shapes.add_picture("../assets/logo.png", Inches(0.25), Inches(0.15), height=Inches(0.7))
 
       return slide
 
