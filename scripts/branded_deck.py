@@ -26,3 +26,13 @@ def add_brand_slide(prs, title_text):
       run.font.color.rgb = NAVY
 
       return slide
+
+if __name__ == "__main__":
+    prs = Presentation()
+    prs.slide_width = Inches(10)
+    prs.slide_height = Inches(5.5)
+
+    add_brand_slide(prs, "Q1'26 Report")
+    add_brand_slide(prs, "Key Themes & Overall Takeaways")
+
+    prs.save("../example/template_test.pptx")
