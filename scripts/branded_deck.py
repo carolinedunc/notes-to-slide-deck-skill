@@ -11,7 +11,7 @@ BACKGROUND = RGBColor(0xFA, 0xFA, 0xFA)
 BLACK = RGBColor(0x2B, 0x2B, 0x2B)
 GREY = RGBColor(0x80, 0x80, 0x80)
 
-def add_brand_slide(prs, title_text, slide_num):
+def add_brand_slide(prs, title_text, slide_num, bullets=None):
       slide = prs.slides.add_slide(prs.slide_layouts[6])
 
       background = slide.background
@@ -74,6 +74,18 @@ def add_brand_slide(prs, title_text, slide_num):
       #logo placement
       logo = slide.shapes.add_picture("../assets/logo.png", Inches(0.25), Inches(0.15), height=Inches(0.7))
 
+      if bullets:
+           body_textbox = slide.shapes.add_textbox(Inches(1.5), Inches(2.0), Inches(7.9), Inches(2.8))
+           body_textframe = body_textbox.text_frame
+           body_textframe.word_wrap = True
+
+           for i, bullet in enumerate(bullets):
+                para = body_textframe.paragraphs[0] if i == 0 else body_textframe.add_paragraph()
+                para.text = f"• {bullet}"
+                para.font.size = Pt(12)
+                para.font.color.rgb = BLACK
+                para.space_after = Pt(9)
+
       return slide
 
 if __name__ == "__main__":
@@ -81,7 +93,7 @@ if __name__ == "__main__":
     prs.slide_width = Inches(10)
     prs.slide_height = Inches(5.5)
 
-    add_brand_slide(prs, "Q1'26 Report", 1)
+    add_brand_slide(prs, "Test Slide", 1, bullets=["First point here", "Second point here"])
     add_brand_slide(prs, "Key Themes & Overall Takeaways", 2)
     add_brand_slide(prs, "Risk", 3)  # very short title
     add_brand_slide(prs, "Customer Pipeline and Revenue Guidance for the Upcoming Fiscal Year", 4)  # very long title
