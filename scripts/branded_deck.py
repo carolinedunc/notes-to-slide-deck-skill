@@ -31,20 +31,25 @@ def add_brand_slide(prs, title_text, slide_num):
       #title formatting
       title_textbox = slide.shapes.add_textbox(Inches(1), Inches(0.4), Inches(8.5), Inches(1.0))
       textframe = title_textbox.text_frame 
+      textframe.word_wrap = True
       textframe.text = title_text
+
       run = textframe.paragraphs[0].runs[0]
-      run.font.size = Pt(25)
+      if len(title_text) > 45:
+            run.font.size = Pt(20)
+      else:
+           run.font.size = Pt(25)
       run.font.bold = True 
       run.font.color.rgb = NAVY
 
       #orange line after title 
-      line1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(1), Inches(9.5), Inches(0.02))
+      line1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(1), Inches(8.5), Inches(0.02))
       line1.fill.solid()
       line1.fill.fore_color.rgb = ORANGE
       line1.line.fill.background()
 
       #footer formatting
-      footer1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(5.3), Inches(9.5), Inches(0.02))
+      footer1 = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(5.3), Inches(8.5), Inches(0.02))
       footer1.fill.solid()
       footer1.fill.fore_color.rgb = GREY
       footer1.line.fill.background()
@@ -78,5 +83,8 @@ if __name__ == "__main__":
 
     add_brand_slide(prs, "Q1'26 Report", 1)
     add_brand_slide(prs, "Key Themes & Overall Takeaways", 2)
+    add_brand_slide(prs, "Risk", 3)  # very short title
+    add_brand_slide(prs, "Customer Pipeline and Revenue Guidance for the Upcoming Fiscal Year", 4)  # very long title
+    add_brand_slide(prs, "Open Questions & Follow-Ups from Site Visit", 5)  # medium-long
 
     prs.save("../example/template_test.pptx")
